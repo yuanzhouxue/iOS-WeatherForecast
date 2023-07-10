@@ -14,6 +14,7 @@
 #import "PlaceList.h"
 #import "Realtime.h"
 #import "Daily.h"
+#import "CYWeatherAllData.h"
 
 @interface Sky : NSObject
 
@@ -36,6 +37,8 @@
 - (void)realtimeLng:(double)lng andLat:(double)lat andHandler:(void (^)(Realtime* res))handler;
 
 - (void)dailyLng:(double)lng andLat:(double)lat andHandler:(void (^)(Daily* res))handler;
+
+- (void)all:(double)lng andLat:(double)lat andHandler:(void (^)(CYWeatherAllData* res)) handler;
 
 + (Sky*)getSky:(NSString*)desc;
 

@@ -8,48 +8,47 @@
 #ifndef Daily_h
 #define Daily_h
 
-@interface LifeIndexDailyItem : NSObject
+#import "DataModelBase.h"
 
-@property (readonly, nonatomic) NSString *date;
-@property (readonly, nonatomic) NSString *desc;
-@property (readonly, nonatomic) int index;
+@interface LifeIndexDailyItem : DataModelBase
 
-- (id)init:(NSDictionary*)dict;
-
-@end
-
-@interface SkyconDailyItem : NSObject
-
-@property (readonly, nonatomic) NSString *date;
-@property (readonly, nonatomic) NSString *value;
-
-- (id)init:(NSDictionary*)dict;
+@property (strong, nonatomic) NSString *date;
+@property (strong, nonatomic) NSString *desc;
+@property (strong, nonatomic) NSNumber *index;
 
 @end
 
-@interface TemperatureDailyItem : NSObject
+@interface SkyconDailyItem : DataModelBase
 
-@property (readonly, nonatomic) double avg;
-@property (readonly, nonatomic) NSString *date;
-@property (readonly, nonatomic) double max;
-@property (readonly, nonatomic) double min;
-
-- (id)init:(NSDictionary*)dict;
+@property (strong, nonatomic) NSString *date;
+@property (strong, nonatomic) NSString *value;
 
 @end
 
-@interface Daily : NSObject
+@interface TemperatureDailyItem : DataModelBase
 
-@property (readonly, nonatomic) NSArray *temperature;
-@property (readonly, nonatomic) NSArray *skycon;
-@property (readonly, nonatomic) NSArray *carWashing;
-@property (readonly, nonatomic) NSArray *coldRisk;
-@property (readonly, nonatomic) NSArray *comfort;
-@property (readonly, nonatomic) NSArray *dressing;
+@property (strong, nonatomic) NSNumber *avg;
+@property (strong, nonatomic) NSString *date;
+@property (strong, nonatomic) NSNumber *max;
+@property (strong, nonatomic) NSNumber *min;
 
+@end
 
+@interface DailyLifeIndex : DataModelBase
 
-- (id)init:(NSDictionary*)dict;
+@property (strong, nonatomic) NSArray<LifeIndexDailyItem*> *carWashing;
+@property (strong, nonatomic) NSArray<LifeIndexDailyItem*> *coldRisk;
+@property (strong, nonatomic) NSArray<LifeIndexDailyItem*> *comfort;
+@property (strong, nonatomic) NSArray<LifeIndexDailyItem*> *dressing;
+
+@end
+
+@interface Daily : DataModelBase
+
+@property (strong, nonatomic) NSArray<TemperatureDailyItem*> *temperature;
+@property (strong, nonatomic) NSArray<SkyconDailyItem*> *skycon;
+@property (strong, nonatomic) DailyLifeIndex *life_index;
+
 
 @end
 

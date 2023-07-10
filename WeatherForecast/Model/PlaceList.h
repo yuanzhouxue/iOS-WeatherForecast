@@ -12,11 +12,9 @@
 #import "PlaceItem.h"
 #import "NSArray+Map.h"
 
-@interface PlaceList : NSObject
+@interface PlaceList : DataModelBase
 
-@property (readonly) NSArray *items;
-
-- (id)init:(NSArray*)arr;
+@property (readonly) NSArray<PlaceItem*> *places;
 
 @end
 

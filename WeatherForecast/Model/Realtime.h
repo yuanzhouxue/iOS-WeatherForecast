@@ -9,38 +9,51 @@
 #define Realtime_h
 
 #import <Foundation/Foundation.h>
+#import "DataModelBase.h"
 
-@interface LifeIndex : NSObject
+@interface LifeIndex : DataModelBase
 
-@property (readonly, nonatomic) NSString *ultraviolet; // 紫外线
-@property (readonly, nonatomic) NSString *dressing; // 穿衣指数
-@property (readonly, nonatomic) NSString *comfort; // 舒适度指数
-@property (readonly, nonatomic) NSString *coldRisk; // 感冒指数
-@property (readonly, nonatomic) NSString *carWashing; // 洗车指数
-
-@end
-
-@interface AirQuality : NSObject
-
-@property (readonly, nonatomic) int aqi;
-@property (readonly, nonatomic) NSString *desc;
-@property (readonly, nonatomic) int co;
-@property (readonly, nonatomic) int no2;
-@property (readonly, nonatomic) int o3;
-@property (readonly, nonatomic) int pm10;
-@property (readonly, nonatomic) int pm25;
-@property (readonly, nonatomic) int so2;
+@property (strong, nonatomic) NSString *ultraviolet; // 紫外线
+@property (strong, nonatomic) NSString *dressing; // 穿衣指数
+@property (strong, nonatomic) NSString *comfort; // 舒适度指数
+@property (strong, nonatomic) NSString *coldRisk; // 感冒指数
+@property (strong, nonatomic) NSString *carWashing; // 洗车指数
 
 @end
 
-@interface Realtime : NSObject
+@interface AirQualityData : DataModelBase
 
-@property (readonly, nonatomic) double temperature;  // 气温
-@property (readonly, nonatomic) NSString *skycon; // 天气现象
-@property (readonly, nonatomic) LifeIndex *lifeIndex; // 生活指数
-@property (readonly, nonatomic) AirQuality *airQuality; // 空气指数
+@property (strong, nonatomic) NSNumber *chn;
+@property (strong, nonatomic) NSNumber *usa;
 
-- (id)init:(NSDictionary*)dict;
+@end
+
+@interface AirQualityDesc : DataModelBase
+
+@property (strong, nonatomic) NSString *chn;
+@property (strong, nonatomic) NSString *usa;
+
+@end
+
+@interface AirQuality : DataModelBase
+
+@property (strong, nonatomic) AirQualityData *aqi;
+@property (strong, nonatomic) AirQualityDesc *desc;
+@property (strong, nonatomic) NSNumber *co;
+@property (strong, nonatomic) NSNumber *no2;
+@property (strong, nonatomic) NSNumber *o3;
+@property (strong, nonatomic) NSNumber *pm10;
+@property (strong, nonatomic) NSNumber *pm25;
+@property (strong, nonatomic) NSNumber *so2;
+
+@end
+
+@interface Realtime : DataModelBase
+
+@property (strong, nonatomic) NSNumber *temperature;  // 气温
+@property (strong, nonatomic) NSString *skycon; // 天气现象
+@property (strong, nonatomic) LifeIndex *life_index; // 生活指数
+@property (strong, nonatomic) AirQuality *air_quality; // 空气指数
 
 @end
 

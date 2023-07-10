@@ -14,19 +14,10 @@
 
 @implementation PlaceList
 
-
-- (id)init:(NSArray*)arr {
-    self = [super init];
-    if (self) {
-        self->_items = [arr mapObjectsUsingBlock:^id _Nonnull(id  _Nonnull obj, NSUInteger idx) {
-            return [[PlaceItem alloc] init:obj];
-        }];
-    }
-    return self;
-}
+DECLARE_ARRAY_MEMBER(Places, places, PlaceItem)
 
 - (NSString*)description {
-    return [NSString stringWithFormat:@"PlaceList(items = %@)", self->_items];
+    return [NSString stringWithFormat:@"PlaceList(items = %@)", self->_places];
 }
 
 @end

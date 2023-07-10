@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "CYWeather.h"
+#import "CYWeatherAllData.h"
 
 @implementation Sky
 
@@ -74,8 +75,7 @@
         @"lang": @"zh_CN"
     };
     [self getJsonObject:@"v2/place" withPara:paras withHandler:^(NSDictionary *res) {
-        NSArray* places = [res valueForKey:@"places"];
-        PlaceList *place_items = [[PlaceList alloc] init:places];
+        PlaceList *place_items = [[PlaceList alloc] initWithDictionary:res];
 //        NSLog(@"%@", place_items);
         handler(place_items);
     }];
@@ -88,7 +88,7 @@
 //        [res valueForKey:@"result"];
         NSDictionary* result = (NSDictionary*)[res valueForKey:@"result"];
         NSDictionary* realtime = (NSDictionary*)[result valueForKey:@"realtime"];
-        Realtime* ret = [[Realtime alloc] init:realtime];
+        Realtime* ret = [[Realtime alloc] initWithDictionary:realtime];
         handler(ret);
     }];
 }
@@ -100,8 +100,17 @@
         
         NSDictionary* result = (NSDictionary*)[res valueForKey:@"result"];
         NSDictionary* daily = (NSDictionary*)[result valueForKey:@"daily"];
-        Daily* ret = [[Daily alloc] init:daily];
+        Daily* ret = [[Daily alloc] initWithDictionary:daily];
         handler(ret);
+    }];
+}
+
+- (void)all:(double)lng andLat:(double)lat andHandler:(void (^)(CYWeatherAllData *))handler {
+    NSString *path = [NSString stringWithFormat:@"v2.6/%@/%f,%f/weather?alert=true&dailysteps=15&hourlysteps=24", self->token, lng, lat];
+    [self getJsonObject:path withPara:nil withHandler:^(NSDictionary *res) {
+        NSDictionary *result = (NSDictionary*)[res valueForKey:@"result"];
+        CYWeatherAllData *item = [[CYWeatherAllData alloc] initWithDictionary:result];
+        handler(item);
     }];
 }
 
@@ -128,13 +137,6 @@
         @"SAND": [[Sky alloc] init:@"沙尘" ic:@"ic_fog" bg:@"bg_fog"],
         @"WIND": [[Sky alloc] init:@"大风" ic:@"ic_cloudy" bg:@"bg_wind"]
     };
-//    [m enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, Sky*  _Nonnull obj, BOOL * _Nonnull stop) {
-//        UIImage* ic = [UIImage imageNamed:obj.ic_image];
-//        UIImage* bg = [UIImage imageNamed:obj.bg_image];
-//        if (nil == ic || nil == bg) {
-//            NSLog(@"%@ resource not found.", obj.desc);
-//        }
-//    }];
     return [m valueForKey:desc];
 }
 

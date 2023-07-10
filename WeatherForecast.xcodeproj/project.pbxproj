@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1CA06C9DFEB015C3B7B78F93 /* Pods_WeatherForecast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4941A0F6E3C3B33FEB10D3 /* Pods_WeatherForecast.framework */; };
+		2B41842F2A5BDD98009E6D22 /* CYWeatherAllData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B41842E2A5BDD98009E6D22 /* CYWeatherAllData.m */; };
+		2B4184322A5BF703009E6D22 /* DataModelBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4184312A5BF703009E6D22 /* DataModelBase.m */; };
 		700656B92A29833E00F5B947 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 700656B82A29833E00F5B947 /* AppDelegate.m */; };
 		700656BC2A29833E00F5B947 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 700656BB2A29833E00F5B947 /* SceneDelegate.m */; };
 		700656C22A29833E00F5B947 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 700656C02A29833E00F5B947 /* Main.storyboard */; };
@@ -30,6 +32,10 @@
 		06ED123D8DE03B95D9890CFB /* Pods-WeatherForecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.debug.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.debug.xcconfig"; sourceTree = "<group>"; };
 		0D0CB596BE28E410CA5201CF /* Pods-WeatherForecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.release.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.release.xcconfig"; sourceTree = "<group>"; };
 		0F4941A0F6E3C3B33FEB10D3 /* Pods_WeatherForecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherForecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B41842E2A5BDD98009E6D22 /* CYWeatherAllData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYWeatherAllData.m; sourceTree = "<group>"; };
+		2B4184302A5BDDA4009E6D22 /* CYWeatherAllData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYWeatherAllData.h; sourceTree = "<group>"; };
+		2B4184312A5BF703009E6D22 /* DataModelBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataModelBase.m; sourceTree = "<group>"; };
+		2B4184332A5BF70D009E6D22 /* DataModelBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataModelBase.h; sourceTree = "<group>"; };
 		700656B42A29833E00F5B947 /* WeatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		700656B72A29833E00F5B947 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		700656B82A29833E00F5B947 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -139,6 +145,10 @@
 				700656D72A2983A600F5B947 /* Realtime.h */,
 				700656D52A2983A500F5B947 /* Realtime.m */,
 				700656D42A29838600F5B947 /* Daily.h */,
+				2B41842E2A5BDD98009E6D22 /* CYWeatherAllData.m */,
+				2B4184302A5BDDA4009E6D22 /* CYWeatherAllData.h */,
+				2B4184312A5BF703009E6D22 /* DataModelBase.m */,
+				2B4184332A5BF70D009E6D22 /* DataModelBase.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -286,7 +296,9 @@
 				700656CD2A29834000F5B947 /* main.m in Sources */,
 				700656E92A2983CA00F5B947 /* CYWeather.m in Sources */,
 				700656DD2A2983A700F5B947 /* Daily.m in Sources */,
+				2B4184322A5BF703009E6D22 /* DataModelBase.m in Sources */,
 				700656DC2A2983A700F5B947 /* Realtime.m in Sources */,
+				2B41842F2A5BDD98009E6D22 /* CYWeatherAllData.m in Sources */,
 				700656B92A29833E00F5B947 /* AppDelegate.m in Sources */,
 				700656E72A2983CA00F5B947 /* NSArray+Map.m in Sources */,
 				700656BC2A29833E00F5B947 /* SceneDelegate.m in Sources */,

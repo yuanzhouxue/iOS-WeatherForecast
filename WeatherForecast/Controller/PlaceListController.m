@@ -43,18 +43,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"place_item" forIndexPath:indexPath];
-    PlaceItem *item = [places.items objectAtIndex:indexPath.row];
+    PlaceItem *item = [places.places objectAtIndex:indexPath.row];
     cell.textLabel.text = item.name;
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [places.items count];
+    return [places.places count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    PlaceItem *place_info = [places.items objectAtIndex:indexPath.row];
-    [self saveLocation:place_info.name andLng:place_info.lng andLat:place_info.lat];
+    PlaceItem *place_info = [places.places objectAtIndex:indexPath.row];
+    [self saveLocation:place_info.name andLng:[place_info.lng doubleValue] andLat:[place_info.lat doubleValue]];
     
     [self dismissViewControllerAnimated:true completion:nil];
 }

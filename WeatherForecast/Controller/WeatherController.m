@@ -12,6 +12,8 @@
 #import "SceneDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 
+#import "CYWeatherAllData.h"
+
 @interface WeatherController () <CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *location_label;
 @property (weak, nonatomic) IBOutlet UILabel *temperature_label;
@@ -113,21 +115,26 @@
     }
     NSLog(@"加载天气信息：%@ at %f and %f", saved_loc.name, saved_loc.lng, saved_loc.lat);
     _location_label.text = saved_loc.name;
-    [api realtimeLng:saved_loc.lng andLat:saved_loc.lat andHandler:^(Realtime *res) {
-        [self updateRealtimeWeather:res];
+    [api all:saved_loc.lng andLat:saved_loc.lat andHandler:^(CYWeatherAllData *res) {
+        NSLog(@"%@", res);
+        [self updateRealtimeWeather:res.realtime];
+        [self updateDailyWeather:res.daily];
     }];
-    [api dailyLng:saved_loc.lng andLat:saved_loc.lat andHandler:^(Daily *res) {
-        [self updateDailyWeather:res];
-    }];
+//    [api realtimeLng:saved_loc.lng andLat:saved_loc.lat andHandler:^(Realtime *res) {
+//        [self updateRealtimeWeather:res];
+//    }];
+//    [api dailyLng:saved_loc.lng andLat:saved_loc.lat andHandler:^(Daily *res) {
+//        [self updateDailyWeather:res];
+//    }];
 }
 
 - (void)updateRealtimeWeather:(Realtime*)realtime {
     Sky* sky = [CYWeather getSky:realtime.skycon];
     
-    self.temperature_label.text = [NSString stringWithFormat:@"%.1f °C", realtime.temperature];
-    NSString *aqi_text = [NSString stringWithFormat:@"%@ | 空气指数 %d", sky.desc, realtime.airQuality.aqi];
+    self.temperature_label.text = [NSString stringWithFormat:@"%.1f °C", [realtime.temperature doubleValue]];
+    NSString *aqi_text = [NSString stringWithFormat:@"%@ | 空气指数 %d | %@", sky.desc, [realtime.air_quality.aqi.chn intValue], realtime.air_quality.desc.chn];
     self.aqi_label.text = aqi_text;
-    self.desc_ultraviolet.text = realtime.lifeIndex.ultraviolet;
+//    self.desc_ultraviolet.text = realtime.life_index.ultraviolet;
     
     UIImage* bg_img = [UIImage imageNamed:sky.bg_image];
     UIColor* background = [UIColor colorWithPatternImage:bg_img];
@@ -148,21 +155,21 @@
         self.img_daily_1, self.img_daily_2, self.img_daily_3, self.img_daily_4, self.img_daily_5
     ];
     
-    for (int i = 0; i < daily.temperature.count; ++i) {
+    for (int i = 0; i < daily_temperature.count; ++i) {
         TemperatureDailyItem* tempItem = daily.temperature[i];
         SkyconDailyItem* skyconItem = daily.skycon[i];
         Sky* sky = [CYWeather getSky:skyconItem.value];
         
         ((UILabel*)daily_date[i]).text = [tempItem.date substringToIndex:10];
         ((UILabel*)daily_weather[i]).text = sky.desc;
-        ((UILabel*)daily_temperature[i]).text = [NSString stringWithFormat:@"%.0f - %.0f °C", tempItem.min, tempItem.max];
+        ((UILabel*)daily_temperature[i]).text = [NSString stringWithFormat:@"%.0f - %.0f °C", [tempItem.min doubleValue], [tempItem.max doubleValue]];
         
         ((UIImageView*)daily_icon[i]).image = [UIImage imageNamed:sky.ic_image];
     }
     
-    self.desc_coldrisk.text = ((LifeIndexDailyItem*)daily.coldRisk[0]).desc;
-    self.desc_dressing.text = ((LifeIndexDailyItem*)daily.dressing[0]).desc;
-    self.desc_carwashing.text = ((LifeIndexDailyItem*)daily.carWashing[0]).desc;
+    self.desc_coldrisk.text = ((LifeIndexDailyItem*)daily.life_index.coldRisk[0]).desc;
+    self.desc_dressing.text = ((LifeIndexDailyItem*)daily.life_index.dressing[0]).desc;
+    self.desc_carwashing.text = ((LifeIndexDailyItem*)daily.life_index.carWashing[0]).desc;
 }
 
 - (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {

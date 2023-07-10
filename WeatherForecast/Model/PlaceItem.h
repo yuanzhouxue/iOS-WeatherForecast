@@ -8,17 +8,15 @@
 #ifndef PlaceItem_h
 #define PlaceItem_h
 
-#import <Foundation/Foundation.h>
+#import "DataModelBase.h"
 
-@interface PlaceItem : NSObject
+@interface PlaceItem : DataModelBase
 
 @property (readonly) NSString *placeId;
 @property (readonly) NSString *name;
 @property (readonly) NSString *formattedAddress;
-@property (readonly) double lng;
-@property (readonly) double lat;
-
-- (id)init:(NSDictionary*)dict;
+@property (readonly) NSNumber *lng;
+@property (readonly) NSNumber *lat;
 
 @end
 
