@@ -9,6 +9,13 @@
 
 @implementation LifeIndex
 
+- (instancetype)initWithDictionary:(NSDictionary *)dict {
+    self = [super initWithDictionary:dict];
+    self->_ultraviolet = [(NSDictionary*)dict[@"ultraviolet"] valueForKey:@"desc"];
+    self->_comfort = [(NSDictionary*)dict[@"comfort"] valueForKey:@"desc"];
+    return self;
+}
+
 @end
 
 @implementation AirQualityData
@@ -25,7 +32,7 @@ DECLARE_OBJECT_MEMBER(Aqi, aqi, AirQualityData)
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
     if ([key isEqualToString:@"description"]) {
-        self.desc = [[AirQualityDesc alloc] initWithDictionary:value];
+        self->_desc = [[AirQualityDesc alloc] initWithDictionary:value];
     }
 }
 

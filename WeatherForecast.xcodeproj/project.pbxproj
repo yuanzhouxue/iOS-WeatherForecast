@@ -10,6 +10,9 @@
 		1CA06C9DFEB015C3B7B78F93 /* Pods_WeatherForecast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4941A0F6E3C3B33FEB10D3 /* Pods_WeatherForecast.framework */; };
 		2B41842F2A5BDD98009E6D22 /* CYWeatherAllData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B41842E2A5BDD98009E6D22 /* CYWeatherAllData.m */; };
 		2B4184322A5BF703009E6D22 /* DataModelBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4184312A5BF703009E6D22 /* DataModelBase.m */; };
+		2B4184352A5D3BB7009E6D22 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4184342A5D3BB7009E6D22 /* MainViewController.m */; };
+		2B4184392A5D493B009E6D22 /* DailyItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4184382A5D493B009E6D22 /* DailyItemCell.m */; };
+		2B41843C2A5D5AA2009E6D22 /* LifeIndexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B41843B2A5D5AA2009E6D22 /* LifeIndexCell.m */; };
 		700656B92A29833E00F5B947 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 700656B82A29833E00F5B947 /* AppDelegate.m */; };
 		700656BC2A29833E00F5B947 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 700656BB2A29833E00F5B947 /* SceneDelegate.m */; };
 		700656C22A29833E00F5B947 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 700656C02A29833E00F5B947 /* Main.storyboard */; };
@@ -36,6 +39,12 @@
 		2B4184302A5BDDA4009E6D22 /* CYWeatherAllData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYWeatherAllData.h; sourceTree = "<group>"; };
 		2B4184312A5BF703009E6D22 /* DataModelBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataModelBase.m; sourceTree = "<group>"; };
 		2B4184332A5BF70D009E6D22 /* DataModelBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataModelBase.h; sourceTree = "<group>"; };
+		2B4184342A5D3BB7009E6D22 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		2B4184362A5D3BC1009E6D22 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		2B4184382A5D493B009E6D22 /* DailyItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyItemCell.m; sourceTree = "<group>"; };
+		2B41843A2A5D494A009E6D22 /* DailyItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DailyItemCell.h; sourceTree = "<group>"; };
+		2B41843B2A5D5AA2009E6D22 /* LifeIndexCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LifeIndexCell.m; sourceTree = "<group>"; };
+		2B41843D2A5D5AAD009E6D22 /* LifeIndexCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LifeIndexCell.h; sourceTree = "<group>"; };
 		700656B42A29833E00F5B947 /* WeatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		700656B72A29833E00F5B947 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		700656B82A29833E00F5B947 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -87,6 +96,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2B4184372A5D491E009E6D22 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2B4184382A5D493B009E6D22 /* DailyItemCell.m */,
+				2B41843A2A5D494A009E6D22 /* DailyItemCell.h */,
+				2B41843B2A5D5AA2009E6D22 /* LifeIndexCell.m */,
+				2B41843D2A5D5AAD009E6D22 /* LifeIndexCell.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		6EDECF35BC2E3606DB16988C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +137,7 @@
 		700656B62A29833E00F5B947 /* WeatherForecast */ = {
 			isa = PBXGroup;
 			children = (
+				2B4184372A5D491E009E6D22 /* View */,
 				700656EA2A2983E000F5B947 /* Controller */,
 				700656E02A2983CA00F5B947 /* Utils */,
 				700656D32A29834E00F5B947 /* Model */,
@@ -173,6 +194,8 @@
 				700656EC2A2983E000F5B947 /* WeatherController.m */,
 				700656ED2A2983E000F5B947 /* PlaceListController.m */,
 				700656EE2A2983E000F5B947 /* WeatherController.h */,
+				2B4184342A5D3BB7009E6D22 /* MainViewController.m */,
+				2B4184362A5D3BC1009E6D22 /* MainViewController.h */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -294,6 +317,7 @@
 				700656EF2A2983E000F5B947 /* WeatherController.m in Sources */,
 				700656F02A2983E000F5B947 /* PlaceListController.m in Sources */,
 				700656CD2A29834000F5B947 /* main.m in Sources */,
+				2B4184352A5D3BB7009E6D22 /* MainViewController.m in Sources */,
 				700656E92A2983CA00F5B947 /* CYWeather.m in Sources */,
 				700656DD2A2983A700F5B947 /* Daily.m in Sources */,
 				2B4184322A5BF703009E6D22 /* DataModelBase.m in Sources */,
@@ -304,7 +328,9 @@
 				700656BC2A29833E00F5B947 /* SceneDelegate.m in Sources */,
 				700656E82A2983CA00F5B947 /* LocationStorage.m in Sources */,
 				700656DF2A2983A700F5B947 /* PlaceItem.m in Sources */,
+				2B4184392A5D493B009E6D22 /* DailyItemCell.m in Sources */,
 				700656C52A29833E00F5B947 /* WeatherForecast.xcdatamodeld in Sources */,
+				2B41843C2A5D5AA2009E6D22 /* LifeIndexCell.m in Sources */,
 				700656DE2A2983A700F5B947 /* PlaceList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

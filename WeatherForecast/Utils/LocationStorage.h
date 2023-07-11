@@ -9,15 +9,19 @@
 #define LocationStorage_h
 
 #import <Foundation/Foundation.h>
-#import "WeatherForecast+CoreDataModel.h"
+
+@interface Location : NSObject
+
+@property (readonly, nonatomic) NSString *name;
+@property (readonly, nonatomic) NSNumber *lng;
+@property (readonly, nonatomic) NSNumber *lat;
+
+@end
 
 @interface LocationStorage : NSObject
 
-+ (instancetype)sharedInstance;
-
-- (id) init;
-- (Location*) getSavedLocation;
-- (void) saveLocation:(NSString*)name andLng:(double)lng andLat:(double)lat;
++ (Location*) getSavedLocation;
++ (void) saveLocation:(NSString*)name andLng:(NSNumber*)lng andLat:(NSNumber*)lat;
 
 @end
 

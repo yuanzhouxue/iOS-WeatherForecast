@@ -63,7 +63,6 @@
         } else {
             NSDictionary *result = (NSDictionary*)responseObject;
             completionHandler(result);
-            
         }
     }];
     [task resume];
@@ -76,7 +75,6 @@
     };
     [self getJsonObject:@"v2/place" withPara:paras withHandler:^(NSDictionary *res) {
         PlaceList *place_items = [[PlaceList alloc] initWithDictionary:res];
-//        NSLog(@"%@", place_items);
         handler(place_items);
     }];
 }
@@ -84,8 +82,6 @@
 - (void)realtimeLng:(double)lng andLat:(double)lat andHandler:(void (^)(Realtime* res))handler {
     NSString *path = [NSString stringWithFormat:@"v2.5/%@/%f,%f/realtime.json", self->token, lng, lat];
     [self getJsonObject:path withPara:nil withHandler:^(NSDictionary *res) {
-//        NSLog(@"%@", res);
-//        [res valueForKey:@"result"];
         NSDictionary* result = (NSDictionary*)[res valueForKey:@"result"];
         NSDictionary* realtime = (NSDictionary*)[result valueForKey:@"realtime"];
         Realtime* ret = [[Realtime alloc] initWithDictionary:realtime];
@@ -96,8 +92,6 @@
 - (void)dailyLng:(double)lng andLat:(double)lat andHandler:(void (^)(Daily *))handler {
     NSString *path = [NSString stringWithFormat:@"v2.5/%@/%f,%f/daily?dailysteps=5", self->token, lng, lat];
     [self getJsonObject:path withPara:nil withHandler:^(NSDictionary* res) {
-//        NSLog(@"%@", res);
-        
         NSDictionary* result = (NSDictionary*)[res valueForKey:@"result"];
         NSDictionary* daily = (NSDictionary*)[result valueForKey:@"daily"];
         Daily* ret = [[Daily alloc] initWithDictionary:daily];

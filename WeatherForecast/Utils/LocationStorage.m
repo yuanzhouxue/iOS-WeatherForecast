@@ -9,65 +9,38 @@
 #import "LocationStorage.h"
 #import "AppDelegate.h"
 
-@implementation LocationStorage {
-    NSPersistentContainer *container;
-    Location *cache;
-}
+@implementation Location
 
-static LocationStorage* __sharedInstance = nil;
-
-+ (instancetype) sharedInstance {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        __sharedInstance = [[super allocWithZone:NULL] init];
-    });
-    return __sharedInstance;
-}
-
-+(id) allocWithZone:(struct _NSZone *)zone
-{
-    return [LocationStorage sharedInstance] ;
-}
- 
--(id) copyWithZone:(struct _NSZone *)zone
-{
-    return [LocationStorage sharedInstance] ;
-}
-
-- (id) init {
-    self = [super init];
-    if (self) {
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        container = delegate.persistentContainer;
-        
-        cache = nil;
+- (instancetype)initWithDIctionary:(NSDictionary*)dict {
+    if (self = [super init]) {
+        [self setValuesForKeysWithDictionary:dict];
     }
     return self;
 }
 
-- (Location*) getSavedLocation {
-    // ++++++++ 查询数据 ++++++++
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    //设置要查询的实体：
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Location" inManagedObjectContext:container.viewContext];
-    request.entity = entity;
-    NSError *error = nil;
-    NSArray *objs = [container.viewContext executeFetchRequest:request error:&error];
-    if (objs.count == 1) cache = objs[0];
-    else NSLog(@"%lu", objs.count);
-    return cache;
+@end
+
+static NSString *location_key = @"location_key";
+
+@implementation LocationStorage {
+    
 }
 
-- (void) saveLocation:(NSString*)name andLng:(double)lng andLat:(double)lat {
-    if (!cache) {
-        cache = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:container.viewContext];
-    }
-    cache.name = name;
-    cache.lng = lng;
-    cache.lat = lat;
-    
-    NSError *error = nil;
-    [container.viewContext save:&error];
+
++ (Location*) getSavedLocation {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *savedLocationDictionary = (NSDictionary*)[userDefaults objectForKey:location_key];
+    return [[Location alloc] initWithDIctionary:savedLocationDictionary];
+}
+
++ (void) saveLocation:(NSString*)name andLng:(NSNumber*)lng andLat:(NSNumber*)lat {
+    NSDictionary *location = @{
+        @"name": name,
+        @"lng": lng,
+        @"lat": lat
+    };
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:location forKey:location_key];
 }
 
 @end

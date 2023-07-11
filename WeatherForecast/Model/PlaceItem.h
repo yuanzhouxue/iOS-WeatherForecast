@@ -14,7 +14,7 @@
 
 @property (readonly) NSString *placeId;
 @property (readonly) NSString *name;
-@property (readonly) NSString *formattedAddress;
+@property (readonly) NSString *formatted_address;
 @property (readonly) NSNumber *lng;
 @property (readonly) NSNumber *lat;
 

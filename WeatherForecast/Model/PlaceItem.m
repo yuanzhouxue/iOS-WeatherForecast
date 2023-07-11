@@ -12,13 +12,12 @@
 
 @implementation PlaceItem
 
-
-//#pragma mark - description
-- (NSString *)description{
-  return [NSString stringWithFormat:
-          @"PlaceItem(name = %@, location = { lng = %f, lat = %f }, formated = %@)",
-          self->_name, self->_lng, self->_lat, self->_formattedAddress];
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    if ([key isEqualToString:@"location"]) {
+        NSDictionary *dict = (NSDictionary*)value;
+        self->_lng = [dict valueForKey:@"lng"];
+        self->_lat = [dict valueForKey:@"lat"];
+    }
 }
-
 
 @end

@@ -60,7 +60,6 @@
 @end
 
 @implementation WeatherController {
-    LocationStorage *storage;
     CYWeather *api;
     Daily *daily_weather;
 }
@@ -81,7 +80,6 @@
     [self.locationManager requestWhenInUseAuthorization];
     self.geoCoder = [[CLGeocoder alloc] init];
     
-    self->storage = [LocationStorage sharedInstance];
     self->api = [[CYWeather alloc] init];
     
     [self updateWeather];
@@ -89,7 +87,6 @@
 
 - (void)iconLocateClicked {
     [self.locationManager startUpdatingLocation];
-    NSLog(@"Locate clicked");
 }
 
 - (void)iconMenuClicked {
@@ -107,25 +104,20 @@
 }
 
 - (void)updateWeather {
-    Location *saved_loc = [storage getSavedLocation];
+    Location *saved_loc = [LocationStorage getSavedLocation];
     
     if (!saved_loc) {
         [self.locationManager startUpdatingLocation];
         return;
     }
-    NSLog(@"加载天气信息：%@ at %f and %f", saved_loc.name, saved_loc.lng, saved_loc.lat);
+    NSLog(@"加载天气信息：%@ at %f and %f", saved_loc.name, [saved_loc.lng doubleValue], [saved_loc.lat doubleValue]);
     _location_label.text = saved_loc.name;
-    [api all:saved_loc.lng andLat:saved_loc.lat andHandler:^(CYWeatherAllData *res) {
-        NSLog(@"%@", res);
+    [api all:[saved_loc.lng doubleValue]
+      andLat:[saved_loc.lat doubleValue]
+  andHandler:^(CYWeatherAllData *res) {
         [self updateRealtimeWeather:res.realtime];
         [self updateDailyWeather:res.daily];
     }];
-//    [api realtimeLng:saved_loc.lng andLat:saved_loc.lat andHandler:^(Realtime *res) {
-//        [self updateRealtimeWeather:res];
-//    }];
-//    [api dailyLng:saved_loc.lng andLat:saved_loc.lat andHandler:^(Daily *res) {
-//        [self updateDailyWeather:res];
-//    }];
 }
 
 - (void)updateRealtimeWeather:(Realtime*)realtime {
@@ -178,7 +170,6 @@
         return;
     }
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways) {
-//        [self.locationManager startUpdatingLocation];
     } else {
         [self selectLocation];
     }
@@ -196,7 +187,9 @@
             }
             
             NSLog(@"定位成功：%@", city);
-            [self saveLocation:city andLng:location.coordinate.longitude andLat:location.coordinate.latitude];
+            [self saveLocation:city
+                        andLng:[NSNumber numberWithDouble:location.coordinate.longitude]
+                        andLat:[NSNumber numberWithDouble:location.coordinate.latitude]];
             [self updateWeather];
         } else if (nil == error && [placemarks count] == 0) {
             NSLog(@"No results were returned.");
@@ -212,8 +205,8 @@
 }
 
 
-- (void)saveLocation:(NSString*)name andLng:(double)lng andLat:(double)lat {
-    [storage saveLocation:name andLng:lng andLat:lat];
+- (void)saveLocation:(NSString*)name andLng:(NSNumber*)lng andLat:(NSNumber*)lat {
+    [LocationStorage saveLocation:name andLng:lng andLat:lat];
 }
 
 @end
